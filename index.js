@@ -1,10 +1,16 @@
 const express = require("express"); 
 const app = express();
+var http = require('http');
+
 
 app.listen(3000, () => {
   console.log("project is running!");
 })
 
+http.createServer(function (req, res){
+  res.write("I'm alive");
+  res.end();
+}).listen(8080);
 
 
 const { Client, GatewayIntentBits } = require('discord.js');
