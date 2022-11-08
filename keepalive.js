@@ -1,5 +1,10 @@
-var http = require('http');
-http.createServer(function (req, res) {
-  res.write("I'm alive");
-  res.end();
-}).listen(8080);
+const express = require("express")
+const app = express()
+
+const server = app.listen(8080, () => {
+    console.log(`Express running → PORT ${server.address().port}`)
+})
+
+app.get("/", (req, res) => {
+    res.send("Online!")
+})
