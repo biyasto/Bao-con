@@ -37,7 +37,7 @@ const thuynhi = ["Thụy Nhi số 2 ko ai số 1","Thuy Nhi mai dinh"];
 const thuynhilenhoa = ["🗲 Thụy Nhi lên hoa coi, nhanh lên 🗲"];
 const khoa = ["Anh Khoa bội bạc","Anh Khoa hiếp dâm con heo, đẩy bà dà xuống biển", "Anh Khoa tồy quá"];
 const oke = ["Ô kê con dê","Ôkê luôn nè"];
-const dô = ["hai ba dô, hai ba dô","Dô liền nè"];
+const doo = ["hai ba dô, hai ba dô","Dô liền nè"];
 client.on('messageCreate', (message) => {
   if (message.author.bot) return;
   // duelist random
@@ -158,8 +158,8 @@ client.on('messageCreate', (message) => {
     }
    //dô
   if (message.content.includes("dô") || message.content.includes("Dô")){
-        const random = Math.floor(Math.random() * oke.do);
-        message.reply(do[random]);
+        const random = Math.floor(Math.random() * doo.length);
+        message.reply(doo[random]);
         return;
     }
 });
