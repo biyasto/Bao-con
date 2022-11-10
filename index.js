@@ -1,4 +1,3 @@
-const status_log = require('./statuslog.js')
 const { Client, GatewayIntentBits } = require('discord.js');
  
 const client = new Client({
@@ -133,7 +132,7 @@ client.on('messageCreate', (message) => {
       return;
     }
   //bye
-  if (message.content.includes("bye") || message.content.includes("Bye") ){
+  if (message.content.includes("bye") || message.content.includes("Bye") || message.content.includes("bai") ){
         const random = Math.floor(Math.random() * bye.length);
         message.reply(bye[random]);
         return;
