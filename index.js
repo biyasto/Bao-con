@@ -40,9 +40,11 @@ const oke = ["Ôkê con dê","Ôkê luôn nè"];
 const doo = ["hai ba dô, hai ba dô","Dô liền nè"];
 const meow = ["meow meow"];
 client.on('messageCreate', (message) => {
-
+  //avoid reply to self and other bot
    if (message.author.bot) return;
-  var message_lc= message.content.toLocaleLowerCase();
+  //Lowercase msg and normalize
+  var message_lc= message.content.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  //kick
   console.log(message_lc);
     if (message_lc.includes("kick")){
       const random = Math.floor(Math.random() * thangthua.length);
@@ -50,74 +52,74 @@ client.on('messageCreate', (message) => {
       return;
     }
    // thang hay thua 
-    if ((message_lc.includes("thang")||message_lc.includes("thắng"))  && message_lc.includes("thua")){
+    if ((message_lc.includes("thang"))  && message_lc.includes("thua")){
       const random = Math.floor(Math.random() * thangthua.length);
       message.reply(thangthua[random])
       return;
     }
   
   // duelist random
-    if ((message_lc.includes("duel")) && (message_lc.includes("gì")|| (message_lc.includes("gi")))){
+    if (message_lc.includes("duel") && message_lc.includes("gi")){
       const random = Math.floor(Math.random() * duelist.length);
       message.reply(duelist[random])
       return;
     }
   //controller
-  if ((message_lc.includes("control")) && (message_lc.includes("gì")|| (message_lc.includes("gi")))){
+  if (message_lc.includes("control") && message_lc.includes("gì")){
       const random = Math.floor(Math.random() * controller.length);
       message.reply(controller[random])
       return;
     }
   //sentinel
-  if ((message_lc.includes("sen")) && (message_lc.includes("gì")|| (message_lc.includes("gi")))){
+  if (message_lc.includes("sen") && message_lc.includes("gì")){
       const random = Math.floor(Math.random() * sentinel.length);
       message.reply(sentinel[random])
       return;
     }
     //innitrator
-  if ((message_lc.includes("inni")) && (message_lc.includes("gì")|| (message_lc.includes("gi")))){
+  if (message_lc.includes("inni") && message_lc.includes("gì")){
       const random = Math.floor(Math.random() * innitrator.length);
       message.reply(innitrator[random])
       return;
     }
-  //good gun
-    if ((message_lc.includes("luc") || message_lc.includes("lục")) && (message_lc.includes("gì")|| (message_lc.includes("gi")))){
+  // gun pistol
+    if ((message_lc.includes("luc") || message_lc.includes("pist")) && message_lc.includes("gi")){
       const random = Math.floor(Math.random() * gun.length);
       message.reply(gun[random]);
       return;
     }
   //eco gun
-   if ((message_lc.includes("nghèo") || message_lc.includes("eco") || message_lc.includes("ngheo")) && (message_lc.includes("gì")|| (message_lc.includes("gi")))){
+   if ((message_lc.includes("eco") || message_lc.includes("ngheo")) && message_lc.includes("gi")){
       const random = Math.floor(Math.random() * ecogun.length);
       message.reply(ecogun[random]);
       return;
     }
   //good gun
-    if ((message_lc.includes("súng") || message_lc.includes("sung")) && (message_lc.includes("gì")|| (message_lc.includes("gi")))){
+    if (message_lc.includes("sung") && message_lc.includes("gi")){
       const random = Math.floor(Math.random() * gun.length);
       message.reply(gun[random]);
       return;
     }
   //agent random
-  if ((message_lc.includes("con") || message_lc.includes("agent")) && (message_lc.includes("gì") || (message_lc.includes("gi")))){
+  if ((message_lc.includes("con") || message_lc.includes("agent")) && message_lc.includes("gi")){
       const random = Math.floor(Math.random() * agents.length);
       message.reply(agents[random]);
       return;
     }
-  
-
   //To Dat
-  if ((message_lc.includes("tô") || message_lc.includes("to")) && (message_lc.includes("đạt")||message_lc.includes("dat")) || message_lc.includes("tđạt") || message_lc.includes("tdat")){
+  if ((message_lc.includes("to") && message_lc.includes("dat")) || message_lc.includes("tdat")){
      message.reply("☠️☠️☠️")
     }
   //thuynhi ko len hoa
-  if (message.content.includes("thuynhi") ||  message.content.includes("thụy nhi")){
+  if (message.content.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("thuy") &&       
+      message.content.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("nhi")){
         const random = Math.floor(Math.random() * thuynhilenhoa.length);
         message.reply(thuynhilenhoa[random]);
         return;
     }
   //Thuy Nhi 
-  if ( message.content.includes("Thuy Nhi") || message.content.includes("Thụy Nhi")|| message.content.includes("Thuỵ Nhi")|| message.content.includes("ThuyNhi")){
+  if ( message.content.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("Thuy") &&
+      message.content.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("Nhi")){
       const random = Math.floor(Math.random() * thuynhi.length);
       message.reply(thuynhi[random]);
       return;
@@ -129,7 +131,7 @@ client.on('messageCreate', (message) => {
       return;
     }
   //chơi
-  if (!(message_lc.includes("gì") || message_lc.includes("gi"))&& (message_lc.includes("chơi") || message_lc.includes("choi"))){
+  if (message_lc.includes("choi")){
       const random = Math.floor(Math.random() * choi.length);
       message.reply(choi[random]);
       return;
@@ -141,7 +143,7 @@ client.on('messageCreate', (message) => {
       return;  
     }
   //bắn
-  if (message_lc.includes("ban") || message_lc.includes("bắn")){
+  if (message_lc.includes("ban")){
       const random = Math.floor(Math.random() * ban.length);
       message.reply(ban[random]);
       return;
@@ -171,21 +173,27 @@ client.on('messageCreate', (message) => {
         return;
     }
    //oke
-  if (message_lc.includes("ô kê") || message_lc.includes("oke")|| message_lc.includes("ô kê") || message_lc.includes("ok")){
+  if (message_lc.includes("o ke") || message_lc.includes("ok")){
         const random = Math.floor(Math.random() * oke.length);
         message.reply(oke[random]);
         return;
     }
    //dô
-  if (message_lc.includes("dô")){
+  if ( message.content.includes("dô")){
         const random = Math.floor(Math.random() * doo.length);
         message.reply(doo[random]);
         return;
     }
-     //dô
+     //meow
   if (message_lc.includes("meow") || message_lc.includes("meo")){
         const random = Math.floor(Math.random() * meow.length);
         message.reply(meow[random]);
+        return;
+    }
+   //chê
+  if (message_lc.includes("che") || message_lc.includes("cke")){
+        const random = Math.floor(Math.random() * meow.length);
+        message.reply("cke^ nka");
         return;
     }
 });
