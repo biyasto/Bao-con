@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits } = require('discord.js');
- 
+const {map} = require('./map.js')
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -15,186 +15,155 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)
 })
 
-const agents = ["Breach", "Brimstone", "Chamber", "Cypher", "Jett", "KAY/O", "Killjoy", "Neon", "Omen","Phoenix", "Raze","Reyna", "Sage", "Skye", "Sova", "Viper", "Yoru"];
+//if (map instanceof Map) {
+  //const result = map.get('agents');
+  //message.reply(result[Math.floor(Math.random() * result.length)]);
+ //}
+function GetMapRandomValue(name) {
+     const value = map.get(name);
+     const result = value[Math.floor(Math.random() * value.length)];
+     console.log("reply: "+result);
+     return result
+}
 
-const thangthua = ["Ez win", "Thua sml"];
-const duelist =["Jett","Neon","Phoenix","Reyna","Yoru","Raze","Sage chiến > duelist"];
-const controller =["Omen","Viper","Brimstone","Habor","Đi thẳng vào mà bắn, khói làm gì"];
-const sentinel =["Killjoy","Chamber","Sage","Cypher"];
-const innitrator =["Skye","Sova","KAY/O","Breach"];
+//debug:
+//GetMapRandomValue('doo')
 
-const gun =["Phantom","Vandal","Operator","Odin Gay"];
-const ecogun =["Sheriff","Marshal","Spectre","Ghost"];
-const sungluc=["Cờlácsít","Ghost 👻","Sheriff 🤠","Frenzy go brrrr"]
-const khen = ["Gke","10 điểm","10k momo","chòi oi! ghê quá"];
-const ban = ["Bùm chíu","pằng pằng","🔫🔫"];
-const choi = ["Dô hoi","30s dô liền", "Tới sáng luôn nè"];
-const bye = ["Bái bai mn","Ngủ nghỉ thui"];
-const daden = ["👨🏿","👨🏿👨🏿", "👨🏿👨🏿👨🏿"];
-const warmup = ["ông hoàng bắn bot, chúa tể warmup","Bắn như đbrr mà suốt ngày warmup", "Vô luôn đi bạn ê! warmup cũng bắn gà như thường à"];
-
-const thuynhi = ["Thụy Nhi số 2 ko ai số 1","Thuy Nhi mai dinh"];
-const thuynhilenhoa = ["🗲 Thụy Nhi lên hoa coi, nhanh lên 🗲"];
-const khoa = ["Anh Khoa bội bạc","Anh Khoa hiếp dâm con heo, đẩy bà dà xuống biển", "Anh Khoa tồy quá"];
-const oke = ["Ôkê con dê","Ôkê luôn nè"];
-const doo = ["hai ba dô, hai ba dô","Dô liền nè"];
-const meow = ["meow meow"];
 client.on('messageCreate', (message) => {
   //avoid reply to self and other bot
-   if (message.author.bot) return;
+  if (!(map instanceof Map) || message.author.bot) return;
   //Lowercase msg and normalize
-  var message_lc= message.content.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  //Note: Tại vì Chữ Đ ko ko có normalize
+  const message_lc= message.content.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");;
   //kick
   console.log(message_lc);
-    if (message_lc.includes("kick")){
-      const random = Math.floor(Math.random() * thangthua.length);
-      message.reply("con người chứ phải con bot đâu mà có 1 câu dọa hoài")
+  if (message_lc.includes("kick")){
+      message.reply(GetMapRandomValue('kick'));
       return;
     }
    // thang hay thua 
-    if ((message_lc.includes("thang"))  && message_lc.includes("thua")){
-      const random = Math.floor(Math.random() * thangthua.length);
-      message.reply(thangthua[random])
+  if ((message_lc.includes("thang"))  && message_lc.includes("thua")){
+      message.reply(GetMapRandomValue('thangthua'));
       return;
     }
-  
   // duelist random
-    if (message_lc.includes("duel") && message_lc.includes("gi")){
-      const random = Math.floor(Math.random() * duelist.length);
-      message.reply(duelist[random])
+  if (message_lc.includes("duel") && message_lc.includes("gi")){
+      message.reply(GetMapRandomValue('duelist'));
       return;
     }
   //controller
-  if (message_lc.includes("control") && message_lc.includes("gì")){
-      const random = Math.floor(Math.random() * controller.length);
-      message.reply(controller[random])
+  if (message_lc.includes("control") && message_lc.includes("gi")){
+      message.reply(GetMapRandomValue('controller'));
       return;
     }
   //sentinel
-  if (message_lc.includes("sen") && message_lc.includes("gì")){
-      const random = Math.floor(Math.random() * sentinel.length);
-      message.reply(sentinel[random])
+  if (message_lc.includes("sen") && message_lc.includes("gi")){
+      message.reply(GetMapRandomValue('sentinel'));
       return;
     }
     //innitrator
-  if (message_lc.includes("inni") && message_lc.includes("gì")){
-      const random = Math.floor(Math.random() * innitrator.length);
-      message.reply(innitrator[random])
+  if (message_lc.includes("inni") && message_lc.includes("gi")){
+      message.reply(GetMapRandomValue('innitrator'));
       return;
     }
   // gun pistol
-    if ((message_lc.includes("luc") || message_lc.includes("pist")) && message_lc.includes("gi")){
-      const random = Math.floor(Math.random() * gun.length);
-      message.reply(gun[random]);
+  if ((message_lc.includes("luc") || message_lc.includes("pist")) && message_lc.includes("gi")){
+      message.reply(GetMapRandomValue('sungluc'));
       return;
     }
   //eco gun
-   if ((message_lc.includes("eco") || message_lc.includes("ngheo")) && message_lc.includes("gi")){
-      const random = Math.floor(Math.random() * ecogun.length);
-      message.reply(ecogun[random]);
+  if ((message_lc.includes("eco") || message_lc.includes("ngheo")) && message_lc.includes("gi")){
+      message.reply(GetMapRandomValue('ecogun'));
       return;
     }
   //good gun
-    if (message_lc.includes("sung") && message_lc.includes("gi")){
-      const random = Math.floor(Math.random() * gun.length);
-      message.reply(gun[random]);
+  if (message_lc.includes("sung") && message_lc.includes("gi")){
+      message.reply(GetMapRandomValue('gun'));
       return;
     }
   //agent random
   if ((message_lc.includes("con") || message_lc.includes("agent")) && message_lc.includes("gi")){
-      const random = Math.floor(Math.random() * agents.length);
-      message.reply(agents[random]);
+     message.reply(GetMapRandomValue('agents'));
       return;
     }
   //To Dat
   if ((message_lc.includes("to") && message_lc.includes("dat")) || message_lc.includes("tdat")){
-     message.reply("☠️☠️☠️")
+      message.reply(GetMapRandomValue('todat'));
+      return;
     }
   //thuynhi ko len hoa
   if (message.content.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("thuy") &&       
       message.content.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("nhi")){
-        const random = Math.floor(Math.random() * thuynhilenhoa.length);
-        message.reply(thuynhilenhoa[random]);
-        return;
+      message.reply(GetMapRandomValue('thuynhilenhoa'));
+      return;
+      
     }
   //Thuy Nhi 
   if ( message.content.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("Thuy") &&
       message.content.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("Nhi")){
-      const random = Math.floor(Math.random() * thuynhi.length);
-      message.reply(thuynhi[random]);
+      message.reply(GetMapRandomValue('thuynhi'));
       return;
     }
   //Khoa
   if (message_lc.includes("khoa")){
-      const random = Math.floor(Math.random() * khoa.length);
-      message.reply(khoa[random]);
+      message.reply(GetMapRandomValue('khoa'));
       return;
     }
   //chơi
   if (message_lc.includes("choi")){
-      const random = Math.floor(Math.random() * choi.length);
-      message.reply(choi[random]);
+      message.reply(GetMapRandomValue('choi'));
       return;
     }
-  //khen
+  //ace
     if (message_lc.includes("ace")){
-      const random = Math.floor(Math.random() * khen.length);
-      message.reply(khen[random]);
-      return;  
+      message.reply(GetMapRandomValue('ace'));
+      return;
     }
   //bắn
   if (message_lc.includes("ban")){
-      const random = Math.floor(Math.random() * ban.length);
-      message.reply(ban[random]);
+      message.reply(GetMapRandomValue('ban'));
       return;
     }
   
   //invite
   if (message_lc.includes("invite")){
-       message.reply("https://discord.gg/UShzKuv9");
+      message.reply(GetMapRandomValue('invite'));
       return;
     }
   //bye
   if (message_lc.includes("bye")){
-        const random = Math.floor(Math.random() * bye.length);
-        message.reply(bye[random]);
-        return;
+      message.reply(GetMapRandomValue('bye'));
+      return;
     }
   //daden
   if (message_lc.includes("daden")){
-        const random = Math.floor(Math.random() * daden.length);
-        message.reply(daden[random]);
-        return;
+      message.reply(GetMapRandomValue('daden'));
+      return;
     }
   //warmup
   if (message_lc.includes("warmup") || message_lc.includes("warm up") ){
-        const random = Math.floor(Math.random() * warmup.length);
-        message.reply(warmup[random]);
-        return;
+      message.reply(GetMapRandomValue('warmup'));
+      return;
     }
    //oke
   if (message_lc.includes("o ke") || message_lc.includes("ok")){
-        const random = Math.floor(Math.random() * oke.length);
-        message.reply(oke[random]);
-        return;
+      message.reply(GetMapRandomValue('oke'));
+      return;
     }
    //dô
-  if ( message.content.includes("dô")){
-        const random = Math.floor(Math.random() * doo.length);
-        message.reply(doo[random]);
-        return;
+  if (message.content.includes("dô")){
+      message.reply(GetMapRandomValue('doo'));
+      return;
     }
      //meow
   if (message_lc.includes("meow") || message_lc.includes("meo")){
-        const random = Math.floor(Math.random() * meow.length);
-        message.reply(meow[random]);
-        return;
+      message.reply(GetMapRandomValue('meow'));
+      return;
     }
    //chê
   if (message_lc.includes("che") || message_lc.includes("cke")){
-        const random = Math.floor(Math.random() * meow.length);
-        message.reply("cke^ nka");
-        return;
+      message.reply(GetMapRandomValue('chê'));
+      return;
     }
 });
 
