@@ -1,3 +1,4 @@
+
 const {
     Client,
     GatewayIntentBits
@@ -57,7 +58,7 @@ client.on('messageCreate', (message) => {
         return;
     }
     //controller
-    if (message_lc.includes("control") && message_lc.includes("gi")) {
+    if ((message_lc.includes("control") || message_lc.include("smoke")) && message_lc.includes("gi")) {
         message.reply(GetMapRandomValue('controller'));
         return;
     }
