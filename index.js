@@ -36,6 +36,7 @@ function GetMapRandomValue(name) {
 //GetMapRandomValue('doo')
 
 client.on('messageCreate', (message) => {
+  
     //avoid reply to self and other bot
     if (!(map instanceof Map) || message.author.bot) return;
     //Lowercase msg and normalize
@@ -43,6 +44,9 @@ client.on('messageCreate', (message) => {
     const message_lc = message.content.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");;
     //kick
     console.log(message_lc);
+
+    return;
+  
     if (message_lc.includes("kick")) {
         message.reply(GetMapRandomValue('kick'));
         return;
@@ -58,7 +62,7 @@ client.on('messageCreate', (message) => {
         return;
     }
     //controller
-    if ((message_lc.includes("control") || message_lc.include("smoke")) && message_lc.includes("gi")) {
+    if (message_lc.includes("control") && message_lc.includes("gi")) {
         message.reply(GetMapRandomValue('controller'));
         return;
     }
@@ -110,6 +114,14 @@ client.on('messageCreate', (message) => {
         message.reply(GetMapRandomValue('thuynhi'));
         return;
     }
+
+  // khoa dien
+
+   if((message_lc.includes("khoa") && message_lc.includes("dien")))
+  {
+    message.reply("https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/175709334_1546560289038443_476355755980551800_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=nxpOQKr7z0gAX-sMcvl&_nc_ht=scontent.fsgn8-3.fna&oh=00_AfCqLp16lcTIv17sfNag8wTdhWVLyiQAqsUAddEG6PQA4Q&oe=6377FCF2");
+    return;
+  }
     //Khoa
     if (message_lc.includes("khoa")) {
         message.reply(GetMapRandomValue('khoa'));
@@ -168,9 +180,25 @@ client.on('messageCreate', (message) => {
     }
     //chê
     if (message_lc.includes("che") || message_lc.includes("cke")) {
-        message.reply(GetMapRandomValue('chê'));
+        message.reply(GetMapRandomValue('che'));
         return;
     }
+  if((message_lc.includes("bing") && message_lc.includes("chilling")))
+  {
+    message.reply("https://imgur.com/gallery/4UuuQX7");
+    return;
+  }
+ 
+
+  
+
+  if((message_lc.includes("nguoi") && message_lc.includes("dep trai")))
+  {
+    message.reply("ko ai lam the");
+    return;
+  }
+
+  
 });
 
 client.login(process.env.token)

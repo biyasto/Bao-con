@@ -29,7 +29,8 @@ const map = new Map([
     ['kick', ["con người chứ phải con bot đâu mà có 1 câu dọa hoài"]],
     
     ['invite', ["https://discord.gg/748uCbhs"]],
-    ['che', ["cke^ nka", "gì chứ này thì chê nha"]],
+  
+    ['che', ["cke nka", "gì chứ này thì chê nha"]],
 ]);
 //if (map instanceof Map) {
 //const result = map.get('agents');
